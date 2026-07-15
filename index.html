@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e0f13">
+<title>FutureMe Alarm</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ======================= APP SHELL ======================= -->
+<div id="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span> FutureMe
+    </div>
+    <button id="deviceBtn" class="device-pill" title="Connect bedside device">
+      <span id="deviceDot" class="dot dot-off"></span>
+      <span id="deviceLabel">No device</span>
+    </button>
+  </header>
+
+  <!-- ======================= CAPTURE (home) ======================= -->
+  <main id="view-capture" class="view active">
+    <p class="capture-hint" id="captureHint">
+      Hold the button. Tell future-you <em>what</em>, <em>when</em>, and <em>why it matters</em>.
+    </p>
+    <p class="capture-example">“Wake up at 7:30 — interview at 9. You want this job. Shower first.”</p>
+
+    <div class="mic-wrap">
+      <button id="micBtn" class="mic-btn" aria-label="Hold to record a reminder">
+        <svg viewBox="0 0 24 24" width="56" height="56" fill="currentColor" aria-hidden="true">
+          <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/>
+        </svg>
+      </button>
+      <div id="micRing" class="mic-ring"></div>
+    </div>
+
+    <div id="liveTranscript" class="live-transcript" hidden></div>
+
+    <!-- Post-recording confirm card -->
+    <section id="confirmCard" class="confirm-card" hidden>
+      <div class="confirm-when">
+        <div class="when-label">FIRES</div>
+        <div id="confirmTime" class="when-time">—</div>
+        <div id="confirmCountdownNote" class="when-note"></div>
+      </div>
+      <p id="confirmTranscript" class="confirm-transcript"></p>
+      <div id="timeChips" class="chips" hidden>
+        <button class="chip" data-mins="10">+10 min</button>
+        <button class="chip" data-mins="30">+30 min</button>
+        <button class="chip" data-mins="60">+1 hr</button>
+        <button class="chip" data-preset="tonight">Tonight 9pm</button>
+        <button class="chip" data-preset="tomorrow">Tomorrow 7am</button>
+        <input id="customTime" class="chip chip-input" type="datetime-local">
+      </div>
+      <div class="confirm-actions">
+        <button id="editTimeBtn" class="btn ghost">Change time</button>
+        <button id="armBtn" class="btn primary">Arm it <span id="autoArmCount"></span></button>
+      </div>
+      <button id="discardBtn" class="btn subtle">Discard</button>
+    </section>
+  </main>
+
+  <!-- ======================= UPCOMING ======================= -->
+  <main id="view-alarms" class="view">
+    <h2>Armed</h2>
+    <ul id="alarmList" class="alarm-list"></ul>
+    <p id="alarmsEmpty" class="empty">Nothing armed. Future-you is on their own.</p>
+  </main>
+
+  <!-- ======================= INSIGHTS ======================= -->
+  <main id="view-insights" class="view">
+    <h2>What actually works on you</h2>
+    <div id="insightsBody"></div>
+  </main>
+
+  <nav class="tabbar">
+    <button class="tab active" data-view="capture">Record</button>
+    <button class="tab" data-view="alarms">Armed <span id="armedCount" class="badge" hidden></span></button>
+    <button class="tab" data-view="insights">Insights</button>
+  </nav>
+</div>
+
+<!-- ======================= FIRING OVERLAY ======================= -->
+<div id="firing" class="firing" hidden>
+  <div class="firing-inner">
+    <div class="firing-pulse"></div>
+    <div class="firing-label">MESSAGE FROM PAST YOU</div>
+    <p id="firingTranscript" class="firing-transcript"></p>
+    <div class="firing-actions">
+      <button id="doneBtn" class="btn huge primary">I'M ON IT</button>
+      <button id="snoozeBtn" class="btn huge ghost">5 more min</button>
+    </div>
+    <button id="replayBtn" class="btn subtle">▶ Replay voice</button>
+  </div>
+</div>
+
+<audio id="player"></audio>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
