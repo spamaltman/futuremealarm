@@ -40,6 +40,9 @@ python3 -m http.server 8000
 Mic capture and service workers require a secure context: `localhost` works;
 on a phone, serve over HTTPS (or use a tunnel) and "Add to Home Screen".
 
+For GitHub Pages deployment, enable **Settings → Pages → Build and deployment
+→ Source: GitHub Actions** once in the repository UI before the workflow runs.
+
 Best experienced in Chrome/Edge (Web Speech transcription + Web Bluetooth).
 Everywhere else, recording/alarms/insights still work; transcription falls
 back to chip-based time picking and the device link runs in simulator mode.
